@@ -21,7 +21,13 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 public class RegisterAndLoginController {
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    // @Autowired
+    // private JwtUtil jwtUtil;
+
+    // @Autowired
+    // private AuthenticationManager authenticationManager;
 
     @PostMapping("/api/user/register")
     public ResponseEntity<User> registerUser(@RequestBody User user) {
@@ -30,7 +36,7 @@ public class RegisterAndLoginController {
         // if(cons!=null){
         // return new ResponseEntity<>(HttpStatus.CREATED);
         // }
-        return new ResponseEntity<>(userService.createUser(user),HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.registerUser(user),HttpStatus.CREATED);
     }
 
     @PostMapping("/api/user/login")

@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 public class SupplierController {
+   
     private OrderService orderService;
 
     @Autowired
@@ -22,7 +23,6 @@ public class SupplierController {
         // get all order and return it status code 200 OK
         return new ResponseEntity<>(orderService.getAllOrders(), HttpStatus.OK);
         
-
     }
 
     @PutMapping("/api/supplier/order/update/{orderId}")
