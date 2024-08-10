@@ -15,7 +15,7 @@ private Date orderDate;
 private String status;
 private Integer quantity;
 
-@OneToMany
+@ManyToOne
 private Equipment equipment;
 
 

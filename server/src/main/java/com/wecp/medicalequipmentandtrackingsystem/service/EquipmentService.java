@@ -21,7 +21,7 @@ public class EquipmentService {
 
     public Equipment addEquipment(Long hospitalId, Equipment equipment) {
         Hospital hospital = hospitalRepository.findById(hospitalId)
-        .orElseThrow(()-> new EntityNotFoundException(""));
+        .orElseThrow(()-> new EntityNotFoundException(" "));
         equipment.setHospital(hospital);
         return equipmentRepository.save(equipment);
     }

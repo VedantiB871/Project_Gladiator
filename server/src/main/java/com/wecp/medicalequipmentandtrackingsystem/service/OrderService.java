@@ -38,8 +38,10 @@ public class OrderService {
     }
 
     public Order placeOrder(Long equipmentId, Order order){
-        Equipment e1 = equipmentRepository.findById(equipmentId).get();
+        Equipment e1 = equipmentRepository.findById(equipmentId).orElseThrow(()-> new EntityNotFoundException("No order"));
         order.setEquipment(e1);
+        order.setOrderDate(new Date());
+        order.setStatus("Initiated");
         return orderRepository.save(order);
     }
 }

@@ -15,8 +15,7 @@ public class Maintenance {
     private String description;
     private String status;
    
-    @OneToMany
-    @JoinColumn(name = "id")
+    @ManyToOne
     private Equipment equipment;
 
     public Maintenance() {
