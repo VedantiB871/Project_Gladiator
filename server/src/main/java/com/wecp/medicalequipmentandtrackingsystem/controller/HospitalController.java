@@ -1,6 +1,5 @@
 package com.wecp.medicalequipmentandtrackingsystem.controller;
 
-
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.Equipment;
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.Hospital;
 import com.wecp.medicalequipmentandtrackingsystem.entitiy.Maintenance;
