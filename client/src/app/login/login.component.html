@@ -1,1 +1,56 @@
-//todo: complete missing code..
+<!-- <div>
+    <div>Please Enter your username and password</div>
+    <form [formGroup]="itemForm" (ngSubmit)="onLogin()">
+        <div>
+            <label for="username">Username</label>
+        </div>
+        <div>
+            <input type="text" id="username" placeholder="Enter your username" formControlName="username">
+        </div>
+        <div>
+            <label for="password">Password</label>
+        </div>
+        <div>
+            <input type="password" id="password" placeholder="Enter your password" formControlName="password">
+        </div>
+
+        <div>
+            <p>Don't have an account? <a (click)="registration()">Registration</a></p>
+        </div>
+
+
+    </form>
+</div> -->
+
+<div class="container">
+    <h2>Login</h2>
+  
+    <!-- Error Message -->
+    <div *ngIf="showError" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Login Form -->
+    <form [formGroup]="itemForm" (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" class="form-control" />
+        <div *ngIf="itemForm.get('username')?.invalid && itemForm.get('username')?.touched" class="text-danger">
+          Valid Username is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control" />
+        <div *ngIf="itemForm.get('password')?.invalid && itemForm.get('password')?.touched" class="text-danger">
+          Password is required (min 6 characters).
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="itemForm.invalid">Login</button>
+    </form>
+  
+    <p>Don't have an account? <a (click)="registration()">Register here</a></p>
+  </div>
+  

@@ -1,1 +1,64 @@
-//todo: complete missing code..
+<div>
+  <h2>Request</h2>
+</div>
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+
+    <div>
+      <label for="status">Status:</label>
+      <input id="status" formControlName="status" type="text">
+      <div *ngIf="itemForm.get('status')?.invalid && itemForm.get('status')?.touched">
+        Status is required.
+      </div>
+    </div>
+  
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" formControlName="name" type="text">
+      <div *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
+        Name is required.
+      </div>
+    </div>
+  
+    <div>
+      <label for="date">Order Date:</label>
+      <input id="date" formControlName="date" type="date">
+      <div *ngIf="itemForm.get('date')?.invalid && itemForm.get('date')?.touched">
+        Order date is required and must be in the format YYYY-MM-DD.
+      </div>
+    </div>
+  
+    <div>
+        <label for="hospital">Hospital:</label>
+        <!-- <select id="hospital" formControlName="hospital" (change)="onHospitalSelect($event.target.value)"> -->
+            <select>
+          <option *ngFor="let hospital of hospitalList" [value]="hospital">{{ hospital }}</option>
+        </select>
+        <div *ngIf="itemForm.get('hospital')?.invalid && itemForm.get('hospital')?.touched">
+          Hospital is required.
+        </div>
+      </div>
+  
+    <div>
+      <label for="quantity">Quantity:</label>
+      <input id="quantity" formControlName="quantity" type="number">
+      <div *ngIf="itemForm.get('quantity')?.invalid && itemForm.get('quantity')?.touched">
+        Quantity is required and must be at least 1.
+      </div>
+    </div>
+  
+    <div>
+      <label for="equipment">Equipment:</label>
+      <select id="equipment" formControlName="equipment">
+        <option *ngFor="let equipment of equipmentList" [value]="equipment">{{ equipment }}</option>
+      </select>
+      <div *ngIf="itemForm.get('equipment')?.invalid && itemForm.get('equipment')?.touched">
+        Equipment is required.
+      </div>
+    </div>
+  
+    <button type="submit">Submit</button>
+    <div *ngIf="showError">{{ errorMessage }}</div>
+  </form>
+  
+  <div *ngIf="showMessage">{{ responseMessage }}</div>
+  

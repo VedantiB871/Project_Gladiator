@@ -1,1 +1,61 @@
-//todo: Complete missing code..
+<div class="container">
+    <h2>Create Hospital</h2>
+    <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Hospital Name</label>
+        <input type="text" id="name" formControlName="name" class="form-control" />
+        <div *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
+          Hospital name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" formControlName="location" class="form-control" />
+        <div *ngIf="itemForm.get('location')?.invalid && itemForm.get('location')?.touched">
+          Location is required.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="itemForm.invalid">Create Hospital</button>
+    </form>
+  
+    <div *ngIf="showMessage" class="alert alert-success">
+      {{ responseMessage }}
+    </div>
+    <div *ngIf="showError" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <h2>Add Equipment</h2>
+    <form [formGroup]="equipmentForm" (ngSubmit)="submitEquipment()">
+      <div class="form-group">
+        <label for="equipmentName">Equipment Name</label>
+        <input type="text" id="equipmentName" formControlName="equipmentName" class="form-control" />
+        <div *ngIf="equipmentForm.get('equipmentName')?.invalid && equipmentForm.get('equipmentName')?.touched" >
+          Equipment name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" formControlName="quantity" class="form-control" />
+        <div *ngIf="equipmentForm.get('quantity')?.invalid && equipmentForm.get('quantity')?.touched">
+          Quantity is required.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="equipmentForm.invalid">Add Equipment</button>
+    </form>
+  
+    <div *ngIf="showMessage" class="alert alert-success">
+      {{ responseMessage }}
+    </div>
+    <div *ngIf="showError" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <h2>Hospital List</h2>
+    <ul>
+      <li *ngFor="let hospital of hospitalList">
+        {{ hospital.name }} - {{ hospital.location }}
+      </li>
+    </ul>
+  </div>
+  
