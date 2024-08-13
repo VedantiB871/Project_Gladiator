@@ -34,7 +34,8 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("user_id",response.username);
             localStorage.setItem("user_id",response.email);
           // Handle successful login
-          this.router.navigate(['/dashboard']); // Navigate to dashboard or another route
+          this.router.navigate(['/dashboard']); 
+          // Navigate to dashboard or another route
         },
         (error: any) => {
           this.showError = true;
@@ -50,3 +51,51 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/registration']); // Navigate to registration page
   }
 }
+
+// import { Component, OnInit } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { HttpService } from '../../services/http.service';
+// import { Router } from '@angular/router';
+ 
+// @Component({
+//   selector: 'app-login',
+//   templateUrl: './login.component.html',
+//   styleUrls: ['./login.component.scss']
+// })
+// export class LoginComponent implements OnInit {
+//   itemForm: FormGroup;
+//   formModel: any = {};
+//   showError: boolean = false;
+//   errorMessage: any;
+ 
+//   constructor(private fb: FormBuilder, private httpService: HttpService, private router: Router) {
+//     this.itemForm = this.fb.group({
+//       email: ['', [Validators.required]],
+//       password: ['', [Validators.required, Validators.minLength(6)]]
+//     });
+//   }
+ 
+//   ngOnInit(): void {
+//     // Initialization logic if needed
+//   }
+ 
+//   onLogin(): void {
+//     if (this.itemForm.valid) {
+//       this.httpService.Login(this.itemForm.value).subscribe(
+//         (response: any) => {
+//           // Handle successful login
+//           this.router.navigate(['/dashboard']); // Navigate to dashboard or another route
+//         },
+//         (error: any) => {
+//           this.showError = true;
+//           this.errorMessage = `Login failed: ${error.message}`;
+//         }
+//       );
+//     }
+//   }
+ 
+//   registration(): void {
+//     this.router.navigate(['/registration']); // Navigate to registration page
+//   }
+// }
+ 

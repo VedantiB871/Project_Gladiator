@@ -17,14 +17,15 @@ export class AppComponent {
     this.roleName=authService.getRole();
     if(this.IsLoggin==false)
     {
-      this.router.navigateByUrl('/login'); 
+      //this.router.navigateByUrl('/login'); 
     
     }
   }
   logout()
 {
   this.authService.logout();
-  window.location.reload();
+  // window.location.reload();
+  this.router.navigateByUrl('/login'); 
 }
 
 }
