@@ -26,6 +26,7 @@ export class MaintenanceComponent implements OnInit {
   paginatedList: any = []; // This will hold the items for the current page
   currentPage: number = 1; // Current page number
   itemsPerPage: number = 10; // Number of items per page
+  role: any =''
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService)
     {
       this.itemForm = this.formBuilder.group({
@@ -54,6 +55,12 @@ ngOnInit(): void {
     return null;
   }
   getMaintenance() {
+    if(localStorage.getItem("role")==="HOSPITAL"){
+      this.role="HOSPITAL";
+    }
+    else{
+      this.role=null;
+    }
     this.maintenanceList=[];
     this.httpService.getMaintenance().subscribe((data: any) => {
       this.maintenanceList=data;

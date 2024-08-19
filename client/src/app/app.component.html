@@ -3,7 +3,7 @@
 
   <a class="navbar-brand pt-0">
     MediTrack
-    <span class="navbar-tagline">Your Health, Our Priority</span>
+    <span class="navbar-tagline">Connecting Care</span>
   </a>
   <!-- <marquee>  welcome To MediTrack </marquee> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,12 +20,14 @@
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/createhospital']">Create Hospital</a>
       </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/requestequipment']">Request Equipment</a>
+      </li>
+
       <li class="nav-item">
         <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/schedule-maintenance']">Scheduled Maintenance</a>
  
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" *ngIf="roleName === 'HOSPITAL'" [routerLink]="['/requestequipment']">Request Equipment</a>
       </li>
  
       

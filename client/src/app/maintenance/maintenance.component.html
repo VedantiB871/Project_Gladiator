@@ -51,7 +51,7 @@
     </div>
   </div> -->
   <div class="row mt-3">
-    <!-- <div class="card mt-4">
+    <div class="card mt-4">
         <div class="card-header">
             <h4>Maintenance Information</h4>
         </div>
@@ -68,7 +68,9 @@
                         <th>Equipment</th>  
                         <th>Hospital</th>                
                         <th>Edit</th>
-                        <th>Delete</th>
+                        <th *ngIf= "role==='HOSPITAL'">
+                            Delete
+                        </th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let val of maintenanceList">
@@ -89,7 +91,10 @@
                         <td>
                             <button  data-bs-toggle="modal" (click)="edit(val)" data-bs-target="#driverModal"  class="btn btn-warning" [disabled]="val.status === 'Complete'">Edit</button>
                         </td>
-                        <td>
+                        <!-- <td>
+                            <button   (click)="onDelete(val.id)" class="btn btn-warning">Delete</button>
+                        </td> -->
+                        <td *ngIf="role==='HOSPITAL'">
                             <button   (click)="onDelete(val.id)" class="btn btn-warning">Delete</button>
                         </td>
                         <br>
@@ -100,16 +105,16 @@
             </table>
      
             <!-- Pagination Controls -->
-            <!-- <ul class="pagination">
+                <ul class="pagination">
                 <li [class.disabled]="currentPage === 1" (click)="goToPage(1)">
                     <a href="javascript:void(0)">First</a>
                 </li>
                 <li [class.disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
                     <a href="javascript:void(0)">Previous</a>
-                </li> -->
+                </li> 
      
                 <!-- Dynamic Page Numbers -->
-                <!-- <li *ngFor="let page of [].constructor(totalPages); let i = index"
+                <li *ngFor="let page of [].constructor(totalPages); let i = index"
                     [class.active]="i + 1 === currentPage" (click)="goToPage(i + 1)">
                     <a href="javascript:void(0)">{{i + 1}}</a>
                 </li>
@@ -121,11 +126,11 @@
                     <a href="javascript:void(0)">Last</a>
                 </li>
             </ul>
-        </div> --> 
+        </div> 
     </div>
 
  
-        <div class="card">
+        <!-- <div class="card">
             <div class="card-header">Maintenance  Information</div>
         </div>
         <div>
@@ -176,7 +181,7 @@
                     </tbody>
                 </table>
             </div>
-    
+     -->
 
   
  

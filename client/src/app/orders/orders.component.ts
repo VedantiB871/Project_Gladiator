@@ -24,6 +24,7 @@ export class OrdersComponent implements OnInit {
    paginatedList: any = []; // This will hold the items for the current page
    currentPage: number = 1; // Current page number
    itemsPerPage: number = 10; // Number of items per page
+   role: any= '';
    constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService)
   {
   }  
@@ -32,6 +33,12 @@ export class OrdersComponent implements OnInit {
    }  
  
    getOrders() {
+    if(localStorage.getItem("role")==="HOSPITAL"){
+      this.role="HOSPITAL";
+    }
+    else{
+      this.role=null;
+    }
      this.orderList=[];
      this.httpService.getorders().subscribe((data: any) => {
        this.orderList=data;
