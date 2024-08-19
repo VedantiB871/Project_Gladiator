@@ -21,6 +21,9 @@ export class CreatehospitalComponent implements OnInit {
  
   showMessage: any;
   responseMessage: any;
+  paginatedList: any = []; // This will hold the items for the current page
+  currentPage: number = 1; // Current page number
+  itemsPerPage: number = 10; // Number of items per page
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService)
     {
       this.itemForm = this.formBuilder.group({
@@ -45,6 +48,7 @@ export class CreatehospitalComponent implements OnInit {
     this.httpService.getHospital().subscribe((data: any) => {
       this.hospitalList=data;
       console.log(this.hospitalList);
+      this.updatePaginatedList();
     }, error => {
       // Handle error
       this.showError = true;
@@ -103,6 +107,27 @@ export class CreatehospitalComponent implements OnInit {
     else{
       this.equipmentForm.markAllAsTouched();
     }
+  }
+  delete(id:any){
+    // console.log(id);
+    this.httpService.deleteInfo(id).subscribe((a)=>{
+      // this.showMessage=a
+      this.getHospital();
+    });
+  }
+  updatePaginatedList() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedList = this.hospitalList.slice(startIndex, endIndex);
+  }
+ 
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.updatePaginatedList();
+  }
+ 
+  get totalPages(): number {
+    return Math.ceil(this.hospitalList.length / this.itemsPerPage);
   }
  
 }

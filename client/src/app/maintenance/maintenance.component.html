@@ -51,22 +51,101 @@
     </div>
   </div> -->
   <div class="row mt-3">
+    <!-- <div class="card mt-4">
+        <div class="card-header">
+            <h4>Maintenance Information</h4>
+        </div>
+        <div id="DataTable" class="card-body">
+            <table id="table_box_bootstrap" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>SNo</th>
+                        <th>Scheduled Date 
+                            <button (click)="toggleSortOrder()"> {{ sortOrder === 'asc' ? '⬇' : '⬆'}}</button>
+                        </th>
+                        <th>Completion Date</th>
+                        <th>Status</th>      
+                        <th>Equipment</th>  
+                        <th>Hospital</th>                
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let val of maintenanceList">
+                    <tr >
+                        <td>{{val.id}}</td>
+                        <td>{{val.scheduledDate | date: 'dd-MMM-yyyy'}}</td>                  
+                        <td>{{val.completedDate | date: 'dd-MMM-yyyy'}}</td>
+                        <td>{{val.status}}</td>
+                        <td>
+                            <p>Id:{{val.equipment.id}}</p>
+                            <p>Name:{{val.equipment.name}}</p>
+                            <p>Description:{{val.equipment.description}}</p>
+                        </td>
+                        <td>
+                            <p>Id:{{val.equipment.hospital.id}}</p>
+                            <p>Name:{{val.equipment.hospital.name}}</p>
+                        </td>
+                        <td>
+                            <button  data-bs-toggle="modal" (click)="edit(val)" data-bs-target="#driverModal"  class="btn btn-warning" [disabled]="val.status === 'Complete'">Edit</button>
+                        </td>
+                        <td>
+                            <button   (click)="onDelete(val.id)" class="btn btn-warning">Delete</button>
+                        </td>
+                        <br>
+                   
+                    </tr>
+                   
+                </tbody>
+            </table>
+     
+            <!-- Pagination Controls -->
+            <!-- <ul class="pagination">
+                <li [class.disabled]="currentPage === 1" (click)="goToPage(1)">
+                    <a href="javascript:void(0)">First</a>
+                </li>
+                <li [class.disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+                    <a href="javascript:void(0)">Previous</a>
+                </li> -->
+     
+                <!-- Dynamic Page Numbers -->
+                <!-- <li *ngFor="let page of [].constructor(totalPages); let i = index"
+                    [class.active]="i + 1 === currentPage" (click)="goToPage(i + 1)">
+                    <a href="javascript:void(0)">{{i + 1}}</a>
+                </li>
+     
+                <li [class.disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
+                    <a href="javascript:void(0)">Next</a>
+                </li>
+                <li [class.disabled]="currentPage === totalPages" (click)="goToPage(totalPages)">
+                    <a href="javascript:void(0)">Last</a>
+                </li>
+            </ul>
+        </div> --> 
+    </div>
+
  
         <div class="card">
             <div class="card-header">Maintenance  Information</div>
+        </div>
+        <div>
+            <input type="text" placeholder="Search By Hospital Name" [(ngModel)]="searchTitle" (input)="searchCharity()"class="rounded border-0 bg-light w-25 p-2 search-input">
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Sr#</th>
-                            <th>Scheduled Date</th>
+                            <th>SNo</th>
+                            <th>Scheduled Date 
+                                <button (click)="toggleSortOrder()"> {{ sortOrder === 'asc' ? '⬇' : '⬆'}}</button>
+                            </th>
                             <th>Completion Date</th>
                             <th>Status</th>      
                             <th>Equipment</th>  
                             <th>Hospital</th>                
-                            <th>Action</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let val of maintenanceList">
@@ -83,10 +162,12 @@
                             <td>
                                 <p>Id:{{val.equipment.hospital.id}}</p>
                                 <p>Name:{{val.equipment.hospital.name}}</p>
-                                <p>Description:{{val.equipment.hospital.description}}</p>
                             </td>
                             <td>
-                                <button  data-bs-toggle="modal" (click)="edit(val)" data-bs-target="#driverModal"  class="btn btn-warning">Edit</button>
+                                <button  data-bs-toggle="modal" (click)="edit(val)" data-bs-target="#driverModal"  class="btn btn-warning" [disabled]="val.status === 'Complete'">Edit</button>
+                            </td>
+                            <td>
+                                <button   (click)="onDelete(val.id)" class="btn btn-warning">Delete</button>
                             </td>
                             <br>
                        
@@ -95,8 +176,9 @@
                     </tbody>
                 </table>
             </div>
-        </div>
- 
+    
+
+  
  
    
   </div>

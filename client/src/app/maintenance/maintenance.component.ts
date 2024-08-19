@@ -22,6 +22,10 @@ export class MaintenanceComponent implements OnInit {
   responseMessage: any;
   maintenanceList: any=[];
   maintenanceObj: any={};
+  sortOrder: 'asc' | 'desc' = 'asc';
+  paginatedList: any = []; // This will hold the items for the current page
+  currentPage: number = 1; // Current page number
+  itemsPerPage: number = 10; // Number of items per page
   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService)
     {
       this.itemForm = this.formBuilder.group({
@@ -53,7 +57,9 @@ ngOnInit(): void {
     this.maintenanceList=[];
     this.httpService.getMaintenance().subscribe((data: any) => {
       this.maintenanceList=data;
+      this.sortEventsByDate();
      console.log(data)
+     this.updatePaginatedList();
     }, error => {
       // Handle error
       this.showError = true;
@@ -63,7 +69,7 @@ ngOnInit(): void {
   }
   viewDetails(details:any)
   {
-    debugger;
+    // debugger;
     this.maintenanceObj={};
     this.maintenanceObj=details.equipment;
   }
@@ -103,6 +109,50 @@ ngOnInit(): void {
     else{
       this.itemForm.markAllAsTouched();
     }
+  }
+
+  onDelete(eventId: any): any {
+ 
+    this.httpService.delete1(eventId).subscribe(()=>{
+    this.getMaintenance();
+    console.log(eventId);
+   });
+ }
+  sortEventsByDate() {
+    this.maintenanceList.sort((a:any, b:any) => {
+      const dateA = new Date(a.scheduledDate).getTime();
+      const dateB = new Date(b.scheduledDate).getTime();
+      return this.sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+    });
+  }
+ 
+  toggleSortOrder() {
+    this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    this.sortEventsByDate();
+  }
+  searchTitle:string='';
+  searchCharity(){
+    if(this.searchTitle.trim().length!=0){
+      this.maintenanceList=this.maintenanceList.filter((p:any)=>{
+        return p.equipment.hospital.name.toLowerCase().includes(this.searchTitle.toLowerCase());
+      })
+    }else{
+      this.getMaintenance();
+    }
+  }
+  updatePaginatedList() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedList = this.maintenanceList.slice(startIndex, endIndex);
+  }
+ 
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.updatePaginatedList();
+  }
+ 
+  get totalPages(): number {
+    return Math.ceil(this.maintenanceList.length / this.itemsPerPage);
   }
 }
  
